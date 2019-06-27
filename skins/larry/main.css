@@ -1,0 +1,14 @@
+#mailboxlist li > a[rel]:after {
+  content: attr(data-folder-size);
+  padding-left: .5em
+}
+#taskbar a.button-nthu-ee:focus {
+  background-color: #2c2c2c
+}
+#taskbar a.button-nthu-ee.button-selected span.button-inner,
+#taskbar a.button-nthu-ee:hover span.button-inner {
+  background-image: url(images/book_hover.png)
+}
+#taskbar a.button-nthu-ee span.button-inner {
+  background: url(images/book.png) center left no-repeat
+}

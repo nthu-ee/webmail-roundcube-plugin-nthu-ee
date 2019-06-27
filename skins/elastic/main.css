@@ -1,0 +1,7 @@
+#mailboxlist li > a[rel]:after {
+  content: attr(data-folder-size);
+  padding-left: .5em
+}
+.menu a.nthu-ee.manual:before {
+  content: "\f02d"
+}
