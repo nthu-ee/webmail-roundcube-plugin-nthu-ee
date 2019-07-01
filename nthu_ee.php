@@ -53,15 +53,14 @@ final class nthu_ee extends rcube_plugin
     {
         $btns = [
             [
-                'label' => __CLASS__ . '.old_webmail',
-                'title' => __CLASS__ . '.old_webmail_never_receive_new_mail',
+                'label' => "{$this->ID}.old_webmail",
+                'title' => "{$this->ID}.old_webmail_never_receive_new_mail",
                 'href' => 'https://rcmail.ee.nthu.edu.tw',
                 'badgeType' => 'danger',
-                'domain'   => $this->ID,
             ],
             [
-                'label' => __CLASS__ . '.manual',
-                'title' => __CLASS__ . '.open_manual',
+                'label' => "{$this->ID}.manual",
+                'title' => "{$this->ID}.open_manual",
                 'href' => 'skins/.manual/',
                 'target' => '_blank',
             ],
@@ -102,8 +101,8 @@ final class nthu_ee extends rcube_plugin
     {
         $btns = [
             [
-                'label' => __CLASS__ . '.manual',
-                'title' => __CLASS__ . '.open_manual',
+                'label' => "{$this->ID}.manual",
+                'title' => "{$this->ID}.open_manual",
                 'href' => 'skins/.manual/',
                 'target' => '_blank',
             ],
