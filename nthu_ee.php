@@ -73,7 +73,7 @@ final class nthu_ee extends rcube_plugin
             $btn['badgeType'] = $btn['badgeType'] ?? 'secondary';
 
             // should always has 'support-link' class
-            if (!preg_match('/(^|\s)support-link($|\s)/uS', $btn['class'])) {
+            if (!\preg_match('/(^|\s)support-link($|\s)/uS', $btn['class'])) {
                 $btn['class'] .= ' support-link';
             }
 
