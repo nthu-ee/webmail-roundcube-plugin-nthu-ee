@@ -78,11 +78,11 @@ final class nthu_ee extends rcube_plugin
 
             if ($skin === 'elastic') {
                 $btn['class'] .= " badge badge-{$btn['badgeType']}";
-                $btn['data-toggle'] = 'tooltip';
-            }
 
-            // remove pseudo attributes
-            unset($btn['badgeType']);
+                if (!isset($btn['data-toggle']) && isset($btn['title'])) {
+                    $btn['data-toggle'] = 'tooltip';
+                }
+            }
 
             return $btn;
         }, $btns);
