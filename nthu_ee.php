@@ -53,6 +53,13 @@ final class nthu_ee extends rcube_plugin
     {
         $btns = [
             [
+                'label' => __CLASS__ . '.old_webmail',
+                'title' => __CLASS__ . '.old_webmail_never_receive_new_mail',
+                'href' => 'https://rcmail.ee.nthu.edu.tw',
+                'badgeType' => 'danger',
+                'domain'   => $this->ID,
+            ],
+            [
                 'label' => __CLASS__ . '.manual',
                 'title' => __CLASS__ . '.open_manual',
                 'href' => 'skins/.manual/',
@@ -63,6 +70,7 @@ final class nthu_ee extends rcube_plugin
         $btns = \array_map(function ($btn) use ($skin) {
             $btn['type'] = 'link';
             $btn['class'] = $btn['class'] ?? '';
+            $btn['badgeType'] = $btn['badgeType'] ?? 'secondary';
 
             // should always has 'support-link' class
             if (!preg_match('/(^|\s)support-link($|\s)/uS', $btn['class'])) {
@@ -70,9 +78,12 @@ final class nthu_ee extends rcube_plugin
             }
 
             if ($skin === 'elastic') {
-                $btn['class'] .= ' badge badge-secondary';
+                $btn['class'] .= " badge badge-{$btn['badgeType']}";
                 $btn['data-toggle'] = 'tooltip';
             }
+
+            // remove pseudo attributes
+            unset($btn['badgeType']);
 
             return $btn;
         }, $btns);
