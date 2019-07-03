@@ -1,5 +1,5 @@
 // print NTHU EE to devtool's console
-let printNthuSloganToConsole = () => console.log(
+const printNthuSloganToConsole = () => console.log(
   '%c                      ',
   `
     font-family: Arial;

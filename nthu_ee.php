@@ -3,9 +3,7 @@
 final class nthu_ee extends rcube_plugin
 {
     /**
-     * We only load this plugin in all task.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     public $task = '';
 
