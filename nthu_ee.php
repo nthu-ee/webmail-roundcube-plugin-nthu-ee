@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 final class nthu_ee extends rcube_plugin
 {
     /**
@@ -19,35 +21,45 @@ final class nthu_ee extends rcube_plugin
      */
     public function init()
     {
-        $RCMAIL = rcmail::get_instance();
-        $skin = $RCMAIL->config->get('skin');
-
         $this->load_plugin_config();
+
+        $skin = $this->config->get('skin');
+        $local_skin_path = $this->local_skin_path();
 
         $this->add_texts('locales', true);
 
-        $this->add_plugin_assets();
-        $this->add_plugin_login_page_button($skin);
-        $this->add_plugin_taskbar_button($skin);
+        $this->add_plugin_assets($local_skin_path);
+        $this->add_plugin_buttons($skin);
     }
 
     /**
      * Add plugin assets.
+     *
+     * @param string $local_skin_path the local skin path such as "skins/elastic"
      */
-    private function add_plugin_assets(): void
+    private function add_plugin_assets(string $local_skin_path): void
     {
-        $local_skin_path = $this->local_skin_path();
-
         $this->include_stylesheet("{$local_skin_path}/main.css");
         $this->include_script('js/main.min.js');
     }
 
     /**
-     * Add the plugin login page button.
+     * Add plugin buttons.
      *
      * @param string $skin the current skin name
      */
-    private function add_plugin_login_page_button(string $skin): void
+    private function add_plugin_buttons(string $skin): void
+    {
+        $this->add_plugin_buttons_loginfooter($skin);
+        $this->add_plugin_buttons_taskbar($skin);
+    }
+
+    /**
+     * Add the plugin buttons to loginfooter.
+     *
+     * @param string $skin the current skin name
+     */
+    private function add_plugin_buttons_loginfooter(string $skin): void
     {
         $btns = [
             [
@@ -64,7 +76,7 @@ final class nthu_ee extends rcube_plugin
             ],
         ];
 
-        $btns = \array_map(function ($btn) use ($skin) {
+        $btns = \array_map(function (array $btn) use ($skin): array {
             $btn['type'] = 'link';
             $btn['class'] = $btn['class'] ?? '';
             $btn['badgeType'] = $btn['badgeType'] ?? 'secondary';
@@ -91,11 +103,11 @@ final class nthu_ee extends rcube_plugin
     }
 
     /**
-     * Add the plugin taskbar button.
+     * Add the plugin buttons to taskbar.
      *
      * @param string $skin the current skin name
      */
-    private function add_plugin_taskbar_button(string $skin): void
+    private function add_plugin_buttons_taskbar(string $skin): void
     {
         $btns = [
             [
@@ -106,7 +118,7 @@ final class nthu_ee extends rcube_plugin
             ],
         ];
 
-        $btns = \array_map(function ($btn) use ($skin) {
+        $btns = \array_map(function (array $btn) use ($skin): array {
             $btn['type'] = 'link';
             $btn['class'] = $btn['class'] ?? '';
             $btn['innerclass'] = $btn['innerclass'] ?? '';
