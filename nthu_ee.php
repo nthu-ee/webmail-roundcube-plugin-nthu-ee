@@ -78,21 +78,24 @@ final class nthu_ee extends rcube_plugin
 
         $btns = \array_map(function (array $btn) use ($skin): array {
             $btn['type'] = 'link';
-            $btn['class'] = $btn['class'] ?? '';
+            $btn['classArray'] = $this->class_string_to_array($btn['class'] ?? '');
+            $btn['innerclassArray'] = $this->class_string_to_array($btn['innerclass'] ?? '');
             $btn['badgeType'] = $btn['badgeType'] ?? 'secondary';
 
             // should always has 'support-link' class
-            if (!\preg_match('/(^|\s)support-link($|\s)/uS', $btn['class'])) {
-                $btn['class'] .= ' support-link';
-            }
+            $btn['classArray'][] = 'support-link';
 
             if ($skin === 'elastic') {
-                $btn['class'] .= " badge badge-{$btn['badgeType']}";
+                $btn['classArray'][] = 'badge';
+                $btn['classArray'][] = "badge-{$btn['badgeType']}";
 
                 if (!isset($btn['data-toggle']) && isset($btn['title'])) {
                     $btn['data-toggle'] = 'tooltip';
                 }
             }
+
+            $btn['class'] = $this->class_array_to_string($btn['classArray']);
+            $btn['innerclass'] = $this->class_array_to_string($btn['innerclassArray']);
 
             return $btn;
         }, $btns);
@@ -120,28 +123,26 @@ final class nthu_ee extends rcube_plugin
 
         $btns = \array_map(function (array $btn) use ($skin): array {
             $btn['type'] = 'link';
-            $btn['class'] = $btn['class'] ?? '';
-            $btn['innerclass'] = $btn['innerclass'] ?? '';
+            $btn['classArray'] = $this->class_string_to_array($btn['class'] ?? '');
+            $btn['innerclassArray'] = $this->class_string_to_array($btn['innerclass'] ?? '');
 
             if ($skin === 'classic') {
-                $btn['class'] .= ' button-nthu-ee';
-
-                return $btn;
+                $btn['classArray'][] = 'button-nthu-ee';
             }
 
             if ($skin === 'elastic') {
-                $btn['class'] .= ' nthu-ee manual';
-                $btn['innerclass'] .= ' inner';
-
-                return $btn;
+                $btn['classArray'][] = 'nthu-ee';
+                $btn['classArray'][] = 'manual';
+                $btn['innerclassArray'][] = 'inner';
             }
 
             if ($skin === 'larry') {
-                $btn['class'] .= ' button-nthu-ee';
-                $btn['innerclass'] .= ' button-inner';
-
-                return $btn;
+                $btn['classArray'][] = 'button-nthu-ee';
+                $btn['innerclassArray'][] = 'button-inner';
             }
+
+            $btn['class'] = $this->class_array_to_string($btn['classArray']);
+            $btn['innerclass'] = $this->class_array_to_string($btn['innerclassArray']);
 
             return $btn;
         }, $btns);
@@ -149,6 +150,32 @@ final class nthu_ee extends rcube_plugin
         foreach ($btns as $btn) {
             $this->add_button($btn, 'taskbar');
         }
+    }
+
+    /**
+     * Convert the array of classes to HTML class attribute.
+     *
+     * @param array $class_array the array of classes
+     *
+     * @return string
+     */
+    private function class_array_to_string(array $class_array): string
+    {
+        return \implode(' ', $this->class_string_to_array(\implode(' ', $class_array)));
+    }
+
+    /**
+     * Convert the HTML class attribute to an array of classes.
+     *
+     * @param string $class_string the HTML class attribute
+     *
+     * @return array
+     */
+    private function class_string_to_array(string $class_string): array
+    {
+        return \preg_match_all('/[^\s]++/uS', $class_string, $matches)
+            ? \array_unique($matches[0])
+            : [];
     }
 
     /**
