@@ -50,32 +50,38 @@ final class nthu_ee extends rcube_plugin
      */
     private function add_plugin_buttons(string $skin): void
     {
-        $this->add_plugin_buttons_loginfooter($skin);
-        $this->add_plugin_buttons_taskbar($skin);
-    }
-
-    /**
-     * Add the plugin buttons to loginfooter.
-     *
-     * @param string $skin the current skin name
-     */
-    private function add_plugin_buttons_loginfooter(string $skin): void
-    {
-        $btns = [
+        $this->add_plugin_buttons_loginfooter([
             [
                 'label' => "{$this->ID}.old_webmail",
                 'title' => "{$this->ID}.old_webmail_never_receive_new_mail",
                 'href' => 'https://rcmail.ee.nthu.edu.tw',
                 'badgeType' => 'danger',
+            ], [
+                'label' => "{$this->ID}.manual",
+                'title' => "{$this->ID}.open_manual",
+                'href' => 'skins/.manual/',
+                'target' => '_blank',
             ],
+        ], $skin);
+
+        $this->add_plugin_buttons_taskbar([
             [
                 'label' => "{$this->ID}.manual",
                 'title' => "{$this->ID}.open_manual",
                 'href' => 'skins/.manual/',
                 'target' => '_blank',
             ],
-        ];
+        ], $skin);
+    }
 
+    /**
+     * Add the plugin buttons to loginfooter.
+     *
+     * @param array  $btns the buttons
+     * @param string $skin the current skin name
+     */
+    private function add_plugin_buttons_loginfooter(array $btns, string $skin): void
+    {
         $btns = \array_map(function (array $btn) use ($skin): array {
             $btn['type'] = 'link';
             $btn['classArray'] = $this->class_string_to_array($btn['class'] ?? '');
@@ -108,37 +114,31 @@ final class nthu_ee extends rcube_plugin
     /**
      * Add the plugin buttons to taskbar.
      *
+     * @param array  $btns the buttons
      * @param string $skin the current skin name
      */
-    private function add_plugin_buttons_taskbar(string $skin): void
+    private function add_plugin_buttons_taskbar(array $btns, string $skin): void
     {
-        $btns = [
-            [
-                'label' => "{$this->ID}.manual",
-                'title' => "{$this->ID}.open_manual",
-                'href' => 'skins/.manual/',
-                'target' => '_blank',
-            ],
-        ];
-
         $btns = \array_map(function (array $btn) use ($skin): array {
             $btn['type'] = 'link';
             $btn['classArray'] = $this->class_string_to_array($btn['class'] ?? '');
             $btn['innerclassArray'] = $this->class_string_to_array($btn['innerclass'] ?? '');
 
-            if ($skin === 'classic') {
-                $btn['classArray'][] = 'button-nthu-ee';
-            }
-
-            if ($skin === 'elastic') {
-                $btn['classArray'][] = 'nthu-ee';
-                $btn['classArray'][] = 'manual';
-                $btn['innerclassArray'][] = 'inner';
-            }
-
-            if ($skin === 'larry') {
-                $btn['classArray'][] = 'button-nthu-ee';
-                $btn['innerclassArray'][] = 'button-inner';
+            switch ($skin) {
+                case 'classic':
+                    $btn['classArray'][] = 'button-nthu-ee';
+                    break;
+                case 'elastic':
+                    $btn['classArray'][] = 'nthu-ee';
+                    $btn['classArray'][] = 'manual';
+                    $btn['innerclassArray'][] = 'inner';
+                    break;
+                case 'larry':
+                    $btn['classArray'][] = 'button-nthu-ee';
+                    $btn['innerclassArray'][] = 'button-inner';
+                    break;
+                default:
+                    break;
             }
 
             $btn['class'] = $this->class_array_to_string($btn['classArray']);
