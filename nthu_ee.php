@@ -61,6 +61,11 @@ final class nthu_ee extends rcube_plugin
                 'title' => "{$this->ID}.open_manual",
                 'href' => 'skins/.manual/',
                 'target' => '_blank',
+            ], [
+                'label' => "{$this->ID}.department_website",
+                'title' => "{$this->ID}.open_department_website",
+                'href' => 'http://web.ee.nthu.edu.tw',
+                'target' => '_blank',
             ],
         ], $skin);
 
