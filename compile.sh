@@ -75,7 +75,7 @@ for file_src in "${JS_FILES[@]}"; do
         touch "${file_export}"
     fi
 
-    # to make the output file more diff-friendly, we beautify it and remove leading spaces
+    # to make the output file more diff-friendly, we beautify it and remove trailing spaces
     cat "${file_src}" "${file_export}" \
         | browserify -t [ babelify ] - \
         | terser --config-file terser.json -- \
