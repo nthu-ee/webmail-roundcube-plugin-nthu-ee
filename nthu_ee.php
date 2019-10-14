@@ -19,7 +19,7 @@ final class nthu_ee extends rcube_plugin
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function init(): void
     {
         $this->load_plugin_config();
 
@@ -28,27 +28,34 @@ final class nthu_ee extends rcube_plugin
 
         $this->add_texts('locales', true);
 
-        $this->add_plugin_assets($local_skin_path);
-        $this->add_plugin_buttons($skin);
+        $this
+            ->add_plugin_assets($local_skin_path)
+            ->add_plugin_buttons($skin);
     }
 
     /**
      * Add plugin assets.
      *
      * @param string $local_skin_path the local skin path such as "skins/elastic"
+     *
+     * @return self
      */
-    private function add_plugin_assets(string $local_skin_path): void
+    private function add_plugin_assets(string $local_skin_path): self
     {
         $this->include_stylesheet("{$local_skin_path}/main.css");
         $this->include_script('js/main.min.js');
+
+        return $this;
     }
 
     /**
      * Add plugin buttons.
      *
      * @param string $skin the current skin name
+     *
+     * @return self
      */
-    private function add_plugin_buttons(string $skin): void
+    private function add_plugin_buttons(string $skin): self
     {
         $this->add_plugin_buttons_loginfooter([
             [
@@ -77,6 +84,8 @@ final class nthu_ee extends rcube_plugin
                 'target' => '_blank',
             ],
         ], $skin);
+
+        return $this;
     }
 
     /**
@@ -84,8 +93,10 @@ final class nthu_ee extends rcube_plugin
      *
      * @param array  $btns the buttons
      * @param string $skin the current skin name
+     *
+     * @return self
      */
-    private function add_plugin_buttons_loginfooter(array $btns, string $skin): void
+    private function add_plugin_buttons_loginfooter(array $btns, string $skin): self
     {
         $btns = \array_map(function (array $btn) use ($skin): array {
             $btn['type'] = 'link';
@@ -99,10 +110,7 @@ final class nthu_ee extends rcube_plugin
             if ($skin === 'elastic') {
                 $btn['classArray'][] = 'badge';
                 $btn['classArray'][] = "badge-{$btn['badgeType']}";
-
-                if (!isset($btn['data-toggle']) && isset($btn['title'])) {
-                    $btn['data-toggle'] = 'tooltip';
-                }
+                $btn['data-toggle'] = $btn['data-toggle'] ?? 'tooltip';
             }
 
             $btn['class'] = $this->class_array_to_string($btn['classArray']);
@@ -114,6 +122,8 @@ final class nthu_ee extends rcube_plugin
         foreach ($btns as $btn) {
             $this->add_button($btn, 'loginfooter');
         }
+
+        return $this;
     }
 
     /**
@@ -121,8 +131,10 @@ final class nthu_ee extends rcube_plugin
      *
      * @param array  $btns the buttons
      * @param string $skin the current skin name
+     *
+     * @return self
      */
-    private function add_plugin_buttons_taskbar(array $btns, string $skin): void
+    private function add_plugin_buttons_taskbar(array $btns, string $skin): self
     {
         $btns = \array_map(function (array $btn) use ($skin): array {
             $btn['type'] = 'link';
@@ -155,6 +167,8 @@ final class nthu_ee extends rcube_plugin
         foreach ($btns as $btn) {
             $this->add_button($btn, 'taskbar');
         }
+
+        return $this;
     }
 
     /**
@@ -179,7 +193,7 @@ final class nthu_ee extends rcube_plugin
     private function class_string_to_array(string $class_string): array
     {
         return \preg_match_all('/[^\s]++/uS', $class_string, $matches)
-            ? \array_unique($matches[0])
+            ? \array_keys(\array_count_values($matches[0])) // fast array unique
             : [];
     }
 
