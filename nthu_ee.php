@@ -38,8 +38,6 @@ final class nthu_ee extends rcube_plugin
      * Add plugin assets.
      *
      * @param string $skin the skin name
-     *
-     * @return self
      */
     private function add_plugin_assets(string $skin): self
     {
@@ -53,8 +51,6 @@ final class nthu_ee extends rcube_plugin
      * Add plugin buttons.
      *
      * @param string $skin the skin name
-     *
-     * @return self
      */
     private function add_plugin_buttons(string $skin): self
     {
@@ -94,8 +90,6 @@ final class nthu_ee extends rcube_plugin
      *
      * @param array  $btns the buttons
      * @param string $skin the skin name
-     *
-     * @return self
      */
     private function add_plugin_buttons_loginfooter(array $btns, string $skin): self
     {
@@ -132,8 +126,6 @@ final class nthu_ee extends rcube_plugin
      *
      * @param array  $btns the buttons
      * @param string $skin the skin name
-     *
-     * @return self
      */
     private function add_plugin_buttons_taskbar(array $btns, string $skin): self
     {
@@ -176,8 +168,6 @@ final class nthu_ee extends rcube_plugin
      * Convert the array of classes to HTML class attribute.
      *
      * @param array $class_array the array of classes
-     *
-     * @return string
      */
     private function class_array_to_string(array $class_array): string
     {
@@ -188,8 +178,6 @@ final class nthu_ee extends rcube_plugin
      * Convert the HTML class attribute to an array of classes.
      *
      * @param string $class_string the HTML class attribute
-     *
-     * @return array
      */
     private function class_string_to_array(string $class_string): array
     {
