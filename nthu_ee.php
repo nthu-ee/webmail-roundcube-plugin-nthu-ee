@@ -202,7 +202,7 @@ final class nthu_ee extends rcube_plugin
     /**
      * Get the lowercase base skin name for the current skin.
      *
-     * @return string The base skin name. Empty if none.
+     * @return string the base skin name
      */
     private function get_base_skin_name(): string
     {
@@ -219,6 +219,6 @@ final class nthu_ee extends rcube_plugin
             }
         }
 
-        return '';
+        return $skins[0] ?? '';
     }
 }
