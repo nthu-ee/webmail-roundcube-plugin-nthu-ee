@@ -18,7 +18,7 @@ LESS_FILES=(
 )
 
 JS_FILES=(
-    "js/main.js"
+    "assets/main.js"
 )
 
 PATH=${PROJECT_ROOT}/node_modules/.bin:${PATH}
@@ -73,7 +73,7 @@ for file_src in "${JS_FILES[@]}"; do
 
     if [ ! -f "${file_export}" ]; then
         has_no_file_export=true
-        touch "${file_export}"
+        echo ";" > "${file_export}"
     fi
 
     # to make the output file more diff-friendly, we beautify it and remove trailing spaces

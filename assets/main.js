@@ -1,4 +1,4 @@
-const funcs = require('./js/functions');
+const funcs = require('./assets/functions');
 
 const debug = false;
 

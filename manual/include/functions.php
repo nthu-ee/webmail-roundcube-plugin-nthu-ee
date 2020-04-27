@@ -10,8 +10,6 @@ $manualRoot = \realpath(__DIR__ . '/..');
  * Make a URL versionized for preventing from being cached.
  *
  * @param string $url the url
- *
- * @return string
  */
 function assetVersioned(string $url): string
 {
@@ -48,8 +46,6 @@ function assetVersioned(string $url): string
  *
  * @param string $str         the string
  * @param bool   $ignoreEmpty ignore empty value
- *
- * @return array
  */
 function proper_parse_str(string $str, bool $ignoreEmpty = true): array
 {
@@ -93,8 +89,7 @@ function proper_parse_str(string $str, bool $ignoreEmpty = true): array
 function build_url(array $parts): string
 {
     return
-        (isset($parts['scheme']) ? "{$parts['scheme']}:" : '') .
-        (isset($parts['user']) || isset($parts['host']) ? '//' : '') .
+        (isset($parts['scheme']) ? "{$parts['scheme']}://" : '') .
         ($parts['user'] ?? '') .
         (isset($parts['pass']) ? ":{$parts['pass']}" : '') .
         (isset($parts['user']) ? '@' : '') .

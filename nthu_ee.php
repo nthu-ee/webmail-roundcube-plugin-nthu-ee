@@ -47,7 +47,7 @@ final class nthu_ee extends rcube_plugin
 
         $this->add_texts('localization/', false);
         $this->include_stylesheet($this->local_skin_path() . '/main.css');
-        $this->include_script('js/main.min.js');
+        $this->include_script('assets/main.min.js');
 
         $this->addPluginButtons();
     }
