@@ -11,6 +11,7 @@ THREAD_CNT=$(getconf _NPROCESSORS_ONLN)
 PROJECT_ROOT=${SCRIPT_DIR}
 
 LESS_FILES=(
+    "manual/assets/styles/index.less"
     "skins/classic/main.less"
     "skins/elastic/main.less"
     "skins/larry/main.less"

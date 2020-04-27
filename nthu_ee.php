@@ -66,7 +66,7 @@ final class nthu_ee extends rcube_plugin
             ], [
                 'label' => "{$this->ID}.manual",
                 'title' => "{$this->ID}.open_manual",
-                'href' => 'skins/.manual/',
+                'href' => $this->url('manual/'),
                 'target' => '_blank',
             ], [
                 'label' => "{$this->ID}.department_website",
@@ -80,7 +80,7 @@ final class nthu_ee extends rcube_plugin
             [
                 'label' => "{$this->ID}.manual",
                 'title' => "{$this->ID}.open_manual",
-                'href' => 'skins/.manual/',
+                'href' => $this->url('manual/'),
                 'target' => '_blank',
             ],
         ]);
