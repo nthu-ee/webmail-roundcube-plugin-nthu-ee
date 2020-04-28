@@ -74,7 +74,7 @@ final class nthu_ee extends rcube_plugin
                 'href' => 'http://web.ee.nthu.edu.tw',
                 'target' => '_blank',
             ],
-        ]);
+        ], 'elastic' /* the login/logout page is always "elastic" */);
 
         $this->add_buttons_taskbar([
             [
