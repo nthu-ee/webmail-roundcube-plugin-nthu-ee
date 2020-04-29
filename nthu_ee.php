@@ -4,49 +4,33 @@ declare(strict_types=1);
 
 include __DIR__ . '/lib/vendor/autoload.php';
 
-use Jfcherng\Roundcube\Plugin\NthuEe\RoundcubePluginTrait;
+use Jfcherng\Roundcube\Plugin\NthuEe\AbstractRoundcubePlugin;
 
-final class nthu_ee extends rcube_plugin
+final class nthu_ee extends AbstractRoundcubePlugin
 {
-    use RoundcubePluginTrait;
-
     /**
      * {@inheritdoc}
      */
     public $task = '';
 
     /**
-     * Plugin actions and handlers.
-     *
-     * @var array<string,string>
+     * {@inheritdoc}
      */
     public $actions = [];
 
     /**
-     * The plugin configuration.
-     *
-     * @var array
+     * {@inheritdoc}
      */
-    private $config = [];
-
-    /**
-     * The plugin user preferences.
-     *
-     * @var array
-     */
-    private $prefs = [];
+    public $hooks = [];
 
     /**
      * {@inheritdoc}
      */
     public function init(): void
     {
-        $this->loadPluginConfigurations();
-        $this->loadPluginPreferences();
-        $this->registerPluginActions();
+        parent::init();
 
-        $this->add_texts('localization/', false);
-        $this->include_stylesheet($this->local_skin_path() . '/main.css');
+        $this->include_stylesheet("{$this->skinPath}/main.css");
         $this->include_script('assets/main.min.js');
 
         $this->addPluginButtons();
