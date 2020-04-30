@@ -37,6 +37,14 @@ final class nthu_ee extends AbstractRoundcubePlugin
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getDefaultPluginPreferences(): array
+    {
+        return [];
+    }
+
+    /**
      * Add plugin buttons.
      */
     private function addPluginButtons(): void
