@@ -14,7 +14,13 @@ module.exports = {
   },
   globals: {
     $: true,
+    axios: true,
+    Handsontable: true,
     jQuery: true,
+    Qs: true,
+    toastr: true,
+    Vue: true,
+    Vues: true,
   },
   extends: ['eslint:recommended', 'eslint-config-prettier'],
   plugins: ['prettier'],
