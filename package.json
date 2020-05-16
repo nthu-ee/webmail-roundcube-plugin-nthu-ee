@@ -20,7 +20,7 @@
   "scripts": {
     "prettier-check": "prettier --check assets/**/*.js skins/**/*.less manual/assets/**/*.{js,less}",
     "fix": "prettier --write assets/**/*.js skins/**/*.less manual/assets/**/*.{js,less}",
-    "lint": "eslint assets/**/*.js skins/**/*.less manual/assets/**/*.js"
+    "lint": "eslint assets/**/*.js manual/assets/**/*.js"
   },
   "browserslist": "> 1%",
   "resolutions": {}
