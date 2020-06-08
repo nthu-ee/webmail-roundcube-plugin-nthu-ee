@@ -27,6 +27,9 @@
         "symfony/polyfill-php56": "*"
     },
     "config": {
+        "platform": {
+            "php": "7.4.7"
+        },
         "sort-packages": true
     },
     "scripts": {
