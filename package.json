@@ -8,19 +8,19 @@
     "babel-eslint": "^10",
     "babelify": "^10",
     "browserify": "^17",
-    "clean-css-cli": "^4.3.0",
+    "clean-css-cli": "^5",
     "core-js": "^3",
     "eslint": "^7",
-    "eslint-config-prettier": "^6",
+    "eslint-config-prettier": "^8",
     "eslint-plugin-prettier": "^3",
-    "less": "^3.9.0",
+    "less": "^4",
     "prettier": "^2",
     "terser": "^5"
   },
   "scripts": {
-    "prettier-check": "prettier --check assets/**/*.js skins/**/*.less manual/assets/**/*.{js,less}",
-    "fix": "prettier --write assets/**/*.js skins/**/*.less manual/assets/**/*.{js,less}",
-    "lint": "eslint assets/**/*.js manual/assets/**/*.js"
+    "prettier-check": "prettier --check assets/**.js skins/**.less manual/assets/**.{js,less}",
+    "fix": "prettier --write assets/**.js skins/**.less manual/assets/**.{js,less}",
+    "lint": "eslint assets/**.js manual/assets/**.js"
   },
   "browserslist": "> 1%",
   "resolutions": {}
