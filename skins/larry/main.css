@@ -7,8 +7,8 @@
 }
 #taskbar a.button-nthu-ee.button-selected span.button-inner,
 #taskbar a.button-nthu-ee:hover span.button-inner {
-  background-image: url(images/book_hover.png)
+  background-image: url('images//book_hover.png')
 }
 #taskbar a.button-nthu-ee span.button-inner {
-  background: url(images/book.png) center left no-repeat
+  background: url('images//book.png') center left no-repeat
 }
