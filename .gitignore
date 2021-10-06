@@ -5,7 +5,7 @@
 /.project
 /.web-server-pid
 **/oracle.sqlite
-.php_cs.cache
+.php-cs-fixer.cache
 
 # composer
 /vendor/
