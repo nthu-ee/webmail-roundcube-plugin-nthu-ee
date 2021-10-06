@@ -3,8 +3,8 @@
 $version = '20191014a';
 
 $docRoot = $_SERVER['DOCUMENT_ROOT'] ?? '';
-$rcRoot = \realpath(__DIR__ . '/../../..');
-$manualRoot = \realpath(__DIR__ . '/..');
+$rcRoot = realpath(__DIR__ . '/../../..');
+$manualRoot = realpath(__DIR__ . '/..');
 
 /**
  * Make a URL versionized for preventing from being cached.
@@ -16,12 +16,12 @@ function assetVersioned(string $url): string
     global $version, $docRoot, $manualRoot;
 
     // local file
-    if (\strpos($url, '//') === false) {
-        $v = \strpos($url, '/') !== 0
+    if (strpos($url, '//') === false) {
+        $v = strpos($url, '/') !== 0
             // relative to manual root dir
-            ? @\filemtime("{$manualRoot}/{$url}")
+            ? @filemtime("{$manualRoot}/{$url}")
             // relative to doc root dir
-            : @\filemtime("{$docRoot}/{$url}");
+            : @filemtime("{$docRoot}/{$url}");
 
         // fail to get file modified time
         $v = $v ?: $version;
@@ -31,12 +31,12 @@ function assetVersioned(string $url): string
         $v = $version;
     }
 
-    $parts = \parse_url($url);
+    $parts = parse_url($url);
 
     $queries = proper_parse_str($parts['query'] ?? '');
     $queries['v'] = $v;
 
-    $parts['query'] = \http_build_query($queries);
+    $parts['query'] = http_build_query($queries);
 
     return build_url($parts);
 }
@@ -51,8 +51,8 @@ function proper_parse_str(string $str, bool $ignoreEmpty = true): array
 {
     $arr = [];
 
-    foreach (\explode('&', $str) as $pair) {
-        $kv = \explode('=', $pair, 2);
+    foreach (explode('&', $str) as $pair) {
+        $kv = explode('=', $pair, 2);
 
         // only has key but no value
         if (\count($kv) < 2) {
